@@ -2,7 +2,7 @@
 
 The task that I needed to do just once was to create a very simple NVIDIA Jetson based device that will stream internally generated MJPEG (not H.264) videos  to ONVIF clients. Since I am an idiot non familiar with this technology and **not** interested in it, I wanted a simple out-of-box solution. Surprisingly, I could not find an integral solution so had to spend days before I got something working.
 
-My main misunderstanding was the architecture of this device. I thought about ONVIF server as all-in-one software. But actually ONVIF server is separate from streaming part.
+My main misunderstanding was the architecture of this device. I thought about ONVIF server as all-in-one software. But actually ONVIF server is separate from streaming part. So at least two pieces of software must be up and running on ONVIF server (source) device: one to provide information about server, anothre one to do actual streaming.
 
 ## Steps to recreate the solution
 
@@ -18,7 +18,8 @@ To build the stuff you will probably need a recent meson (ensure you do not run 
 > wget https://github.com/mesonbuild/meson/releases/download/0.61.4/meson-0.61.4.tar.gz
 
 Use 
->meson builddir 
+
+>meson builddir
 >cd builddir 
 >ninja
 
@@ -26,7 +27,7 @@ Use
 
 > sudo ./onvif_srvd --ifs eth0 --scope onvif/www.onvif.org/name/TestDev --scope onvif://www.onvif.org/Profile/S --name RTSP --width 640 --height 480 --url rtsp://%s:8554/unicast --type JPEG --no_fork --port 8080
 
-3. Replace gst-rtsp-server-1.20.1/examples/test-appsrc.c with the file from this repo and build it with ninja
+3. Replace gst-rtsp-server-1.20.1/examples/test-appsrc.c with the file from this repo and build it with ninja. This will be a streaming RTSP server that sends out red and blue screens at 7 fps from port 8554, as onvif_srvd advertizes above.
 4. Run 
 >GST_DEBUG=4 gst-rtsp-server-1.20.1/builddir/examples/test-appsrc 
 5. Download ONVIF Device Manager kindly provided by Synesis from https://sourceforge.net/projects/onvifdm/
