@@ -8,10 +8,15 @@ My main misunderstanding was the architecture of this device. I thought about ON
 
 1. Get and build the latest available gstreamer1.0, gst-rtsp-server, gst-plugins-base, gst-plugins-good, gst-plugins-bad, gst-libav. Make sure that all packages have exactly the same version. 1.20.1 worked for me. Use wget to fetch
 > wget https://gstreamer.freedesktop.org/src/gst-rtsp-server/gst-rtsp-server-1.20.1.tar.xz
+> 
 > wget https://gstreamer.freedesktop.org/src/gstreamer/gstreamer-1.20.1.tar.xz
+> 
 > wget https://gstreamer.freedesktop.org/src/gst-libav/gst-libav-1.20.1.tar.xz
+> 
 > wget https://gstreamer.freedesktop.org/src/gst-plugins-good/gst-plugins-good-1.20.1.tar.xz
-> wget https://gstreamer.freedesktop.org/src/gst-plugins-good/gst-plugins-base-1.20.1.tar.xz
+> 
+> wget https://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-1.20.1.tar.xz
+> 
 > wget https://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-1.20.1.tar.xz
 
 To build the stuff you will probably need a recent meson (ensure you do not run an ancient version probably residing on your installation):
