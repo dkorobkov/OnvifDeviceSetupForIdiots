@@ -32,6 +32,10 @@ Use
 
 > make WSSE_ON=1
 
+otherwise you will get the error in your ONVIF viewer:
+
+**The data in element 'Security' must be understood but cannot be processed**
+
 Before build untar gsoap-2.8.91 into onvif_srvd/gsoap-2.8 and build it with
 
 > cd gsoap-2.8/gsoap/src
