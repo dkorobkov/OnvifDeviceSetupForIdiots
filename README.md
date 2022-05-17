@@ -28,7 +28,16 @@ Use
 >cd builddir 
 >ninja
 
-2. Get, build, install and run https://github.com/KoynovStas/onvif_srvd . This will be a server that responds to ONVIF clients' queries and tells them where to get the required stream. You will probably need autotools-1.16 and its dependencies, and gSOAP 2.8.91 (edit GSOAP_VERSION in Makefile).
+2. Get, build (see below), install and run https://github.com/KoynovStas/onvif_srvd . This will be a server that responds to ONVIF clients' queries and tells them where to get the required stream. You will probably need autotools-1.16 and its dependencies, and gSOAP 2.8.91 (edit GSOAP_VERSION in Makefile). Do not forget to build with 
+
+> make WSSE_ON=1
+
+Before build untar gsoap-2.8.91 into onvif_srvd/gsoap-2.8 and build it with
+
+> cd gsoap-2.8/gsoap/src
+> make -f MakefileManual 
+> cd gsoap-2.8/gsoap/wsdl  
+> make -f MakefileManual 
 
 > sudo ./onvif_srvd --ifs eth0 --scope onvif/www.onvif.org/name/TestDev --scope onvif://www.onvif.org/Profile/S --name RTSP --width 640 --height 480 --url rtsp://%s:8554/unicast --type JPEG --no_fork --port 8080
 
