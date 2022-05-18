@@ -43,6 +43,14 @@ Before build untar gsoap-2.8.91 into onvif_srvd/gsoap-2.8 and build it with
 > cd gsoap-2.8/gsoap/wsdl  
 > make -f MakefileManual 
 
+If building on a small device like Raspberry Pi you may want to temporary add more swap space on external flash drive. Note FAT32 does not allow files above 2Gb.
+
+> fallocate 4G /mnt/sda1/myswap.swp
+> mkswap /mnt/sda1/myswap.swp
+> swapon /mnt/sda1/myswap.swp
+
+Building onvif_srvd will take overnight in this case.
+
 > sudo ./onvif_srvd --ifs eth0 --scope onvif/www.onvif.org/name/TestDev --scope onvif://www.onvif.org/Profile/S --name RTSP --width 640 --height 480 --url rtsp://%s:8554/unicast --type JPEG --no_fork --port 8080
 
 3. Replace gst-rtsp-server-1.20.1/examples/test-appsrc.c with the file from this repo and build it with ninja. This will be a streaming RTSP server that sends out red and blue screens at 7 fps from port 8554, as onvif_srvd advertizes above.
